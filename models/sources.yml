@@ -1,0 +1,12 @@
+sources:
+  - name: wwcredit
+    schema: raw
+    tables:
+      - name: GENERIC_FIELD_VALUE_RESULT
+        identifier: GENERIC_FIELD_VALUE_RESULT
+        description: This is a Static table, this table holds the data related to different fields and their values which will be used in different projects without hardcoding any values.   
+
+      - name: diff_amount_data
+        identifier: diff_amount_data
+        description: This is a Static table, this table holds the data related to different fields and their values which will be used in different projects without hardcoding any values.   
+

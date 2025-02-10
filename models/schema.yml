@@ -1,0 +1,118 @@
+version: 2
+
+models:
+  - name: GENERIC_FIELD_VALUE_RESULT
+    columns:
+      - name: generic_field_value_result_sk
+        tests:
+          - not_null
+          - unique
+        data_type: varchar
+        description: This is a unique identifier for each record in the generic result set. It is a string type field.
+      - name: application_name
+        tests:
+          - accepted_values:
+              values:
+                - creditshield_ap
+                - creditshield_ca
+                - creditshield_uk
+          - not_null
+        data_type: varchar
+        description: The name of the application where the data is coming from. This is a string field.
+      - name: etlbatchid
+        data_type: number
+        quote: true
+        description: This is a numeric identifier for the ETL batch that processed this record. It helps in tracking the batch process.
+      - name: etl_batch_date
+        data_type: date
+        quote: true
+        description: This is the date when the ETL batch that processed this record was run. It is stored in date format.
+      - name: card_scheme
+        data_type: varchar
+        quote: true
+        description: The card scheme associated with the transaction. This is a string field.
+      - name: host_key_column
+        data_type: varchar
+        quote: true
+        description: The key column in the host system. This is a string field.
+      - name: host_key_value
+        data_type: array
+        quote: true
+        description: This column stores the value of the host key. The data type is array, which means it can hold any type of data.
+      - name: card_type_inclusion_array
+        data_type: array
+        quote: true
+        description: This column stores an array of card types that are included in the transaction. The data type is array, which means it can hold any type of data.
+      - name: card_type_exclusion_array
+        data_type: array
+        quote: true
+        description: This column stores an array of card types that are excluded from the transaction. The data type is array, which means it can hold any type of data.
+      - name: charge_type_inclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of charge types that are to be included in the analysis. The charge types are represented as strings within the array.
+      - name: charge_type_exclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of charge types that are to be excluded from the analysis. The charge types are represented as strings within the array.
+      - name: pos_entry_mode_inclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of Point of Sale (POS) entry modes that are to be included in the analysis. The POS entry modes are represented as strings within the array.
+      - name: pos_entry_mode_exclusion_array
+        data_type: array
+        quote: true
+        description: This column is a array type that contains an array of Point of Sale (POS) entry modes that are to be excluded from the data processing. Each entry mode in this array represents a different method of data entry at the POS terminal.
+      - name: moto_ec_indicator_inclusion_array
+        data_type: array
+        quote: true
+        description: This column is a array type that contains an array of Mail Order/Telephone Order (MOTO) Electronic Commerce (EC) indicators that are to be included in the data processing. Each indicator in this array represents a different type of MOTO EC transaction.
+      - name: moto_ec_indicator_exclusion_array
+        data_type: array
+        quote: true
+        description: This column is a array type that contains an array of Mail Order/Telephone Order (MOTO) Electronic Commerce (EC) indicators that are to be excluded from the data processing. Each indicator in this array represents a different type of MOTO EC transaction.
+      - name: card_holder_id_inclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of card holder IDs that are included in the data set. The data type is array, which means it can hold any type of data.
+      - name: card_holder_id_exclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of card holder IDs that are excluded from the data set. The data type is array, which means it can hold any type of data.
+      - name: service_level_code_inclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of service level codes that are included in the data set. The data type is array, which means it can hold any type of data.
+      - name: service_level_code_exclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of service level codes that are to be excluded from the data processing. The data type is array, which means it can hold any type of data including arrays, objects, or primitive types.
+      - name: transaction_code_inclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of transaction codes that are to be included in the data processing. The data type is array, which means it can hold any type of data including arrays, objects, or primitive types.
+      - name: transaction_code_exclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of transaction codes that are to be excluded from the data processing. The data type is array, which means it can hold any type of data including arrays, objects, or primitive types.
+      - name: result
+        data_type: varchar
+        quote: true
+        description: This column contains the result of the generic field value. It is a string type field.
+      - name: case_type_inclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of case types that are included in the analysis. It is a array type field.
+      - name: case_type_exclusion_array
+        data_type: array
+        quote: true
+        description: This column contains an array of case types that are excluded from the analysis. It is a array type field.
+      - name: item_type_inclusion_array
+        data_type: array
+        quote: true
+        description: This column is a array type that contains an array of item types that are included for the specific application. The array can contain multiple item types.
+      - name: item_type_exclusion_array
+        data_type: array
+        quote: true
+        description: This column is a array type that contains an array of item types that are excluded for the specific application. The array can contain multiple item types.
+    description: The src_generic_result model is a comprehensive representation of generic results from various applications. It includes a unique identifier (generic_field_value_result_sk), the name of the application (application_name), and ETL batch information (etlbatchid, etl_batch_date). The model also contains details about the card scheme (card_scheme), host key column and value (host_key_column, host_key_value), and various inclusion and exclusion arrays for card type, charge type, POS entry mode, MOTO EC indicator, card holder ID, service level code, transaction code, case type, and item type. The result of the generic field value is stored in the 'result' column. The SQL used to generate this model selects all records from the raw.generic_result table in the WWCREDIT schema.
