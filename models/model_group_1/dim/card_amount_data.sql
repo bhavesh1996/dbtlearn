@@ -20,7 +20,9 @@ WITH dis AS (
     COALESCE(pos_entry_code_diff, 'NA') AS pos_entry_code_diff,
     COALESCE(moto_ec_indicator_diff, 'NA') AS moto_ec_indicator_diff,
     COALESCE(cardholder_id_method_diff, 'NA') AS cardholder_id_method_diff,
-    trans_sk_diff
+    trans_sk_diff,
+    DATE_TRUNC('MONTH', CURRENT_DATE),
+    LAST_DAY(CURRENT_DATE)
   FROM {{ source('wwcredit', 'SRC_MERCH_DATA') }}
   WHERE
     file_date_diff >= (
