@@ -36,6 +36,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  model_group_1:
-    +tags: model_group_1
-    # Applies to all files under models/example/    
+  my_new_project:
+    model_group_1:
+      +tags: model_group_1
+      # Applies to all files under models/example/    
