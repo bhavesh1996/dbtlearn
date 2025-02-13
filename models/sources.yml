@@ -4,7 +4,13 @@ sources:
     tables:
       - name: GENERIC_FIELD_VALUE_RESULT
         identifier: GENERIC_FIELD_VALUE_RESULT
-        description: This is a iceberg Static table, this table holds the data related to different fields and their values which will be used in different projects without hardcoding any values.  
+        description: This is a iceberg Static table, this table holds the data related to different fields and their values which will be used in different projects without hardcoding any values.
+        columns:
+          - name: application_name
+            tests:
+              - not_null              
+              # - accepted_values:
+              #     values: ["creditshield_ap", "creditshield_ca", "creditshield_uk"]
 
       - name: SRC_MERCH_DATA
         identifier: SRC_MERCH_DATA
@@ -12,5 +18,4 @@ sources:
 
       - name: SRC_CURRENCY_DATA
         identifier: SRC_CURRENCY_DATA
-        description: This is a iceberg table, this table holds the data related to merchant.         
-
+        description: This is a iceberg table, this table holds the data related to merchant.
