@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key=['merchant_number_guid','consumption_sk'],
+    unique_key=['merchant_number_guid'],
     incremental_strategy='merge',
     schema='consumption',
     merge_update_columns=['total_turnover', 'cnp_keyed_turnover', 'refund_amount', 'updated_at']
@@ -19,7 +19,7 @@ WITH source_data AS (
         cnp_keyed_turnover,
         refund_amount,
         updated_at,
-        {{ cents_to_dollars('total_turnover') }} as amount_converted,        
+        {{ convert_to_amount('total_turnover') }} as amount_converted,        
         RANK() OVER (PARTITION BY merchant_number_guid ORDER BY updated_at DESC) AS rank
     FROM {{ ref('tbl_amount_calc') }}
 
@@ -39,6 +39,7 @@ SELECT
     total_turnover,
     cnp_keyed_turnover,
     refund_amount,
-    updated_at
+    updated_at,
+    amount_converted
 FROM source_data
 WHERE rank = 1
