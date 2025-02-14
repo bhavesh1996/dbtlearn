@@ -21,7 +21,7 @@ WITH source_data AS (
         updated_at,
         {{ convert_to_amount('total_turnover') }} as amount_converted,        
         RANK() OVER (PARTITION BY merchant_number_guid ORDER BY updated_at DESC) AS rank
-    FROM {{ ref('tbl_amount_calc') }}
+    FROM {{ ref('aggregated_amount_calculation') }}
 
     {% if is_incremental() %}
         WHERE updated_at > (SELECT coalesce(max(updated_at), '1900-01-01') FROM {{ this }})

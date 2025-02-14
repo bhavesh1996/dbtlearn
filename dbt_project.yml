@@ -38,6 +38,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   my_new_project:
-    model_group_1:
-      +tags: model_group_1
+    WWCREDIT:
+      AP:
+      +tags: wwcredit_ap
       
