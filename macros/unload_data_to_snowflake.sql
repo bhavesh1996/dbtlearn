@@ -3,8 +3,8 @@
     {{ log("Unloading data", True) }}
 
     {% set copy_statement %}
-      COPY INTO 'gcs://gcp_dbtpoc/outgoing_file/src_current_data_1.csv'
-      FROM (select * from wwcredit.raw.src_currency_data)
+      COPY INTO 'gcs://gcp_dbtpoc/outgoing_file/wwcredit_ap_merchant_data.csv'
+      FROM (select * from wwcredit.dev_consumption.wwcredit_ap_merchant_data)
       STORAGE_INTEGRATION = gcs_int, 
       OVERWRITE = TRUE,
       HEADER= TRUE,
