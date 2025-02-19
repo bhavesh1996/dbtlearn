@@ -20,7 +20,7 @@ WITH source_data AS (
         refund_amount,
         updated_at,
         {{ convert_to_amount('total_turnover') }} as amount_converted,        
-        RANK() OVER (PARTITION BY merchant_number_guid ORDER BY updated_at DESC) AS rank
+        RANK() OVER (PARTITION BY merchant_number_guid ORDER BY total_turnover DESC) AS rank
     FROM {{ ref('aggregated_amount_calculation') }}
 
     {% if is_incremental() %}

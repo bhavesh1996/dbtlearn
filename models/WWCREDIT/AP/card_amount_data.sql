@@ -1,5 +1,5 @@
 {{ config(
-    schema='confirmed',
+    schema='conformed',
     materialized='table'
 ) }}
 
@@ -16,6 +16,7 @@ WITH dis AS (
     SERVICE_LEVEL_CODE_TRAN_EOD,
     tran_code_diff,
     CARD_TYPE_DIFF,
+    lotr_val as etlbatchid,
     CONCAT(tran_code_diff, CARD_TYPE_DIFF, SERVICE_LEVEL_CODE_TRAN_EOD) AS lotr_val,
     COALESCE(pos_entry_code_diff, 'NA') AS pos_entry_code_diff,
     COALESCE(moto_ec_indicator_diff, 'NA') AS moto_ec_indicator_diff,
@@ -38,7 +39,6 @@ WITH dis AS (
     from_currency,
     settle_alpha_currency_code_diff
   FROM {{ source('wwcredit', 'SRC_CURRENCY_DATA') }}
-  LIMIT 5
 )
 SELECT DISTINCT
   merchant_number_guid,
@@ -55,7 +55,8 @@ SELECT DISTINCT
   pos_entry_code_diff,
   cardholder_id_method_diff,
   TRIM(moto_ec_indicator_diff) AS moto_ec_indicator_diff,
-  SERVICE_LEVEL_CODE_TRAN_EOD
+  SERVICE_LEVEL_CODE_TRAN_EOD,
+  etlbatchid  
 FROM dis AS dis
 INNER JOIN dcr AS dcr
   ON dis.file_date_diff = dcr.conversion_date
