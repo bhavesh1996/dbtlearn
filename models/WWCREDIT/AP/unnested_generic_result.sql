@@ -1,5 +1,5 @@
 {{ config(
-    schema='confirmed',
+    schema='conformed',
     materialized='table'
 ) }}
 

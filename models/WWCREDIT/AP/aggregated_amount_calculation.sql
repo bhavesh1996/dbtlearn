@@ -1,5 +1,5 @@
 {{ config(
-    schema='confirmed',
+    schema='conformed',
     materialized='incremental',
     incremental_strategy='append'
 ) }}
@@ -83,7 +83,12 @@ FROM (
           moto_ec_indicator_diff,
           SERVICE_LEVEL_CODE_TRAN_EOD
         FROM
-        {{ ref("card_amount_data") }}  ) dis
+        {{ ref("card_amount_data") }} 
+        
+    {% if is_incremental() %}
+        WHERE etlbatchid = (SELECT max(etlbatchid) FROM {{ ref("card_amount_data") }} )
+    {% endif %}
+ ) dis
       LEFT JOIN (
         SELECT
           DISTINCT generic_inclusion,
